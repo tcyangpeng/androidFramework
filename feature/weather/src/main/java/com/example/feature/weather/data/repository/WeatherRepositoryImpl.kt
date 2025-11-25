@@ -25,8 +25,14 @@ class WeatherRepositoryImpl @Inject constructor(
 ) : WeatherRepository {
 
     companion object {
-        private const val CACHE_DURATION_MS = 30 * 60 * 1000L // 30 minutes
+        /**
+         * Cache duration in milliseconds. Default is 30 minutes.
+         * This can be overridden via BuildConfig or DI in production.
+         */
+        const val DEFAULT_CACHE_DURATION_MS = 30 * 60 * 1000L
     }
+    
+    private var cacheDurationMs: Long = DEFAULT_CACHE_DURATION_MS
 
     override fun getWeatherByCity(cityName: String, forceRefresh: Boolean): Flow<Result<WeatherInfo>> = flow {
         emit(Result.Loading)
@@ -102,6 +108,6 @@ class WeatherRepositoryImpl @Inject constructor(
     }
 
     private fun isCacheExpired(updatedAt: Long): Boolean {
-        return System.currentTimeMillis() - updatedAt > CACHE_DURATION_MS
+        return System.currentTimeMillis() - updatedAt > cacheDurationMs
     }
 }

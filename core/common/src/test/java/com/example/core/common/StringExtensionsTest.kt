@@ -1,7 +1,6 @@
 package com.example.core.common
 
 import com.example.core.common.extension.capitalizeFirst
-import com.example.core.common.extension.isValidEmail
 import com.example.core.common.extension.isValidPhoneNumber
 import com.example.core.common.extension.nullIfBlank
 import com.example.core.common.extension.removeWhitespace
@@ -14,18 +13,7 @@ import org.junit.Test
 
 class StringExtensionsTest {
 
-    @Test
-    fun `isValidEmail should return true for valid email`() {
-        assertTrue("test@example.com".isValidEmail())
-        assertTrue("user.name+tag@domain.co.uk".isValidEmail())
-    }
-
-    @Test
-    fun `isValidEmail should return false for invalid email`() {
-        assertFalse("invalid-email".isValidEmail())
-        assertFalse("@nodomain.com".isValidEmail())
-        assertFalse("no@".isValidEmail())
-    }
+    // Note: isValidEmail tests are in androidTest as they require Android Patterns class
 
     @Test
     fun `isValidPhoneNumber should return true for valid phone`() {

@@ -1,15 +1,17 @@
 package com.example.core.common.extension
 
+import android.util.Patterns
+
 /**
  * Extension functions for String.
  */
 
 /**
  * Returns true if the string is a valid email format.
+ * Uses Android's built-in Patterns.EMAIL_ADDRESS for comprehensive validation.
  */
 fun String.isValidEmail(): Boolean {
-    val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$".toRegex()
-    return this.matches(emailRegex)
+    return this.isNotBlank() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 }
 
 /**

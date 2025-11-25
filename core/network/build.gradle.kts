@@ -14,8 +14,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
         
-        // Open Weather Map API - Free tier, public API key for demo
-        buildConfigField("String", "WEATHER_API_KEY", "\"demo\"")
+        // Weather API configuration
+        // Note: In production, use local.properties or CI/CD secrets for API keys
+        // Example: buildConfigField("String", "WEATHER_API_KEY", "\"${project.findProperty("WEATHER_API_KEY") ?: ""}\"")
+        buildConfigField("String", "WEATHER_API_KEY", "\"${project.findProperty("WEATHER_API_KEY") ?: "demo"}\"")
         buildConfigField("String", "WEATHER_BASE_URL", "\"https://api.openweathermap.org/data/2.5/\"")
     }
 

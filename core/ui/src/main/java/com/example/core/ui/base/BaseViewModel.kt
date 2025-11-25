@@ -3,6 +3,7 @@ package com.example.core.ui.base
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -47,7 +48,7 @@ abstract class BaseViewModel<S : UiState, E : UiEvent, F : UiEffect> : ViewModel
     /**
      * One-time effects (navigation, snackbar, etc).
      */
-    private val _effect: Channel<F> = Channel()
+    private val _effect: Channel<F> = Channel(BUFFERED)
     val effect = _effect.receiveAsFlow()
 
     /**
