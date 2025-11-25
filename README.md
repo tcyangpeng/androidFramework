@@ -83,6 +83,17 @@ Weather feature implementation:
 - JDK 17
 - Android SDK 34
 
+### API Key Setup
+
+The weather feature uses OpenWeatherMap API. To configure your API key:
+
+1. Create a `local.properties` file in the project root (if not exists)
+2. Add your API key:
+   ```properties
+   WEATHER_API_KEY=your_api_key_here
+   ```
+3. Get a free API key from [OpenWeatherMap](https://openweathermap.org/api)
+
 ### Building
 ```bash
 ./gradlew assembleDebug
@@ -107,6 +118,14 @@ Domain Layer (Business logic)
 Data Layer (Network/Database)
 ```
 
+### Data Flow
+
+```
+User Action → ViewModel (Event) → Use Case → Repository → Data Source (API/DB)
+                    ↓
+              UI State Update → Fragment (Render)
+```
+
 ## Dependencies
 
 - **Kotlin**: 1.9.22
@@ -116,6 +135,24 @@ Data Layer (Network/Database)
 - **DataStore**: 1.0.0
 - **Coroutines**: 1.7.3
 - **Lifecycle**: 2.7.0
+
+## Adding New Features
+
+To add a new feature module:
+
+1. Create a new module under `feature/` directory
+2. Add module to `settings.gradle.kts`
+3. Create the following structure:
+   ```
+   feature/your_feature/
+   ├── src/main/
+   │   ├── java/com/example/feature/your_feature/
+   │   │   ├── di/           # Hilt modules
+   │   │   ├── data/         # Repository implementations
+   │   │   └── ui/           # ViewModels, Fragments
+   │   └── res/layout/       # Layout files
+   └── build.gradle.kts
+   ```
 
 ## License
 
